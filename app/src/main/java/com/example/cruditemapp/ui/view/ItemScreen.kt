@@ -1,9 +1,5 @@
 package com.example.cruditemapp.ui.view
 
-
-
-
-
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -28,28 +24,21 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.cruditemapp.model.Item
 import com.example.cruditemapp.viewmodel.ItemViewModel
 
-
 @Composable
 fun ItemScreen(
     modifier: Modifier = Modifier,
     viewModel: ItemViewModel = viewModel()
 ) {
-
     val items by viewModel.items
 
     var title by remember { mutableStateOf(TextFieldValue("")) }
     var description by remember { mutableStateOf(TextFieldValue("")) }
 
-    var showDialog by remember {
-        mutableStateOf(false)
-    }
-
-    var selectedItem by remember {
-        mutableStateOf<Item?>(null)
-    }
+    var showDialog by remember { mutableStateOf(false) }
+    var selectedItem by remember { mutableStateOf<Item?>(null) }
 
     Column(
-        modifier = Modifier.padding(16.dp)
+        modifier = modifier.then(Modifier.padding(16.dp))
     ) {
         TextField(
             value = title,
@@ -74,12 +63,9 @@ fun ItemScreen(
                     title = TextFieldValue("")
                     description = TextFieldValue("")
                 }
-
-
             },
             modifier = Modifier.padding(8.dp)
-        )
-        {
+        ) {
             Text(text = "Adicionar")
         }
 
@@ -115,11 +101,7 @@ fun ItemScreen(
                     }
                 }
             }
-
-
         }
-
-
     }
 
     if (showDialog) {
@@ -132,10 +114,7 @@ fun ItemScreen(
             }
         )
     }
-
-
 }
-
 
 @Composable
 fun UpdateItemDialog(
@@ -143,16 +122,10 @@ fun UpdateItemDialog(
     onDismiss: () -> Unit,
     onUpdate: (Item) -> Unit
 ) {
-
     if (item == null) return
 
-    var title by remember {
-        mutableStateOf(TextFieldValue(item.title))
-    }
-
-    var description by remember {
-        mutableStateOf(TextFieldValue(item.description))
-    }
+    var title by remember { mutableStateOf(TextFieldValue(item.title)) }
+    var description by remember { mutableStateOf(TextFieldValue(item.description)) }
 
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -180,14 +153,11 @@ fun UpdateItemDialog(
             }) {
                 Text(text = "Salvar")
             }
-
         },
         dismissButton = {
             Button(onClick = onDismiss) {
                 Text(text = "Cancelar")
             }
         }
-
     )
-
 }
